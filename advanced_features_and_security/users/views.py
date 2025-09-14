@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required, login_required
 from .models import Document
+from .forms import DocumentForm
 from django.views import View
 
 @permission_required('users.can_view', raise_exception=True)
@@ -11,7 +12,14 @@ def document_list(request):
 
 @permission_required('users.can_create', raise_exception=True)
 def document_create(request):
-    return HttpResponse("Create document page")
+    if request.method == 'POST':
+        form = DocumentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Document created!")
+    else:
+        form = DocumentForm()
+    return render(request, 'document_form.html', {'form': form})
 
 @permission_required('users.can_edit', raise_exception=True)
 def document_edit(request, pk):
