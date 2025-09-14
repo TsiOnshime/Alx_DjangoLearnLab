@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.conf import settings
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email=None, password=None, date_of_birth=None, profile_photo=None, **extra_fields):
@@ -24,3 +25,16 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class Document(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    class Meta:
+        permissions = [
+            ("can_view", "Can view document"),
+            ("can_create", "Can create document"),
+            ("can_edit", "Can edit document"),
+            ("can_delete", "Can delete document"),
+        ]

@@ -43,6 +43,13 @@ This project is a Django application that customizes the user model to include a
 - Access the application at `http://127.0.0.1:8000/`
 - Admin interface available at `http://127.0.0.1:8000/admin/` (create a superuser to access)
 
+## Permissions & Groups Setup
+
+- Custom permissions (`can_view`, `can_create`, `can_edit`, `can_delete`) are defined in the Document model.
+- Groups (Editors, Viewers, Admins) can be managed in Django admin.
+- Views are protected using `@permission_required`.
+- Assign users to groups and permissions in admin to control access.
+
 ## Contributing
 
 Feel free to submit issues or pull requests for improvements or bug fixes.
