@@ -1,7 +1,24 @@
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Enforce HTTPS for all requests
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
 
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # Instruct browsers to use HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow site to be included in browser preload lists
+
+# Secure cookies
+SESSION_COOKIE_SECURE = True  # Session cookies only sent over HTTPS
+CSRF_COOKIE_SECURE = True     # CSRF cookies only sent over HTTPS
+
+# Secure headers
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking by denying framing
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME type sniffing
+SECURE_BROWSER_XSS_FILTER = True    # Enable browser XSS filter
+
+# --- Existing settings below ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
