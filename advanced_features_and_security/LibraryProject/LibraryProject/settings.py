@@ -97,7 +97,8 @@ SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME type sniffing
 
 CSRF_COOKIE_SECURE = True         # CSRF cookies only sent over HTTPS
 SESSION_COOKIE_SECURE = True      # Session cookies only sent over HTTPS
-
+# If behind a proxy (e.g., Nginx), trust the X-Forwarded-Proto header for HTTPS detection
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Content Security Policy (CSP) for django-csp >= 4.0
 CONTENT_SECURITY_POLICY = {
     'DIRECTIVES': {
