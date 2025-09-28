@@ -22,7 +22,8 @@ class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.AllowAny]  # Anyone can view
-    filter_backends = [filters.OrderingFilter]  # <-- Enable ordering
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]  # <-- Enable search and ordering
+    search_fields = ['title', 'author__name']  # Search by book title and author name
     ordering_fields = ['title', 'publication_year', 'id', 'author']  # Allow ordering by these fields
     ordering = ['title']  # Default ordering
 
