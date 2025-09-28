@@ -36,3 +36,26 @@ Test with and without authentication to verify permissions.
 
 - All views use Django REST Framework generic views for simplicity and maintainability.
 - Permissions are enforced using DRF's built-in permission classes.
+
+
+
+## Filtering, Searching, and Ordering
+
+### Filtering
+Filter books by title, author, or publication year:
+```
+GET /api/books/?title=Emma&publication_year=1815
+```
+
+### Searching
+Search books by title or author's name:
+```
+GET /api/books/?search=Austen
+```
+
+### Ordering
+Order books by title or publication year:
+```
+GET /api/books/?ordering=publication_year
+GET /api/books/?ordering=-title
+```
