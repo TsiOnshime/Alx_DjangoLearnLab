@@ -16,6 +16,9 @@ class BookListView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['title', 'author', 'publication_year']  # Enable filtering by these fields
     search_fields = ['title', 'author__name']  # Enable search by book title and author name
+    ordering_fields = ['title', 'publication_year', 'id', 'author']  # Allow ordering by these fields
+    ordering = ['title']  # Default ordering
+
 # DetailView: Retrieves a single book by ID. Read-only for unauthenticated users.
 class BookDetailView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
