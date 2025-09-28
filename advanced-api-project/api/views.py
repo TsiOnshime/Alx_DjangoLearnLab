@@ -10,13 +10,19 @@ from .serializers import BookSerializer
 # - Permissions: Open to all users (authenticated or not).
 # - Filtering: Allows filtering by title, author, and publication_year.
 # - Endpoint: GET /books/
+# BookListView:
+# - Purpose: Retrieve a list of all Book instances.
+# - Permissions: Open to all users (authenticated or not).
+# - Filtering, Searching, Ordering: Enabled for flexible queries.
+# - Endpoint: GET /books/
+# - Examples:
+#     /api/books/?ordering=title
+#     /api/books/?ordering=-publication_year
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title', 'author', 'publication_year']  # Enable filtering by these fields
-    search_fields = ['title', 'author__name']  # Enable search by book title and author name
+    permission_classes = [permissions.AllowAny]  # Anyone can view
+    filter_backends = [filters.OrderingFilter]  # <-- Enable ordering
     ordering_fields = ['title', 'publication_year', 'id', 'author']  # Allow ordering by these fields
     ordering = ['title']  # Default ordering
 
