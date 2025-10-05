@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+{% block title %}Blog Posts{% endblock %}
+{% block content %}
+<h2>Blog Posts</h2>
+<p>List of posts will go here.</p>
+
+<form method="get" action="{% url 'search' %}">
+    <input type="text" name="q" placeholder="Search posts...">
+    <button type="submit">Search</button>
+</form>
+{% endblock %}
